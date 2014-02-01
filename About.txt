@@ -1,0 +1,19 @@
+﻿Over 35 Modules --> 
+  - Audio and Video Playback
+  - Speech Synthesis (New!) and Recognition (Work in Progress)
+  - Video Conversion
+  - Webcam Interaction
+  - Database Connectivity and Handlers
+  - Printer Support (Auto Add Network Printers Programmatically)
+  - DLL Integrity Check & Licensing
+  - Encryption and Hashing
+  - Form Effects (Rounding, Fading, Transparancy, Positioning of Windows)
+  - QRCode Generation
+  - Network Tools (Flooder, Ping, External IP Checker, Telnet Client, Wake-on-Lan)
+  - Hardware Information (HDD Status, Thermal Sensors, Etc.)
+  - Software Information (OS Version)
+  - AntiVirus Scanner/File Scanner (Work in Progress since 2011)
+  - Windows 7 Jumplist Handler
+  - Windows 7 & Vista Glass Effects (DWMAPI Handler)
+
+And More!

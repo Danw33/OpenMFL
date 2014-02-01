@@ -1,0 +1,346 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B2363D78-A4BD-4570-8340-9484E8B51D64}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <StartupObject>
+    </StartupObject>
+    <RootNamespace>DCS_Multi_DLL</RootNamespace>
+    <AssemblyName>DCS.Multifunction.Library</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>Windows</MyType>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x64</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>DCS.Multifunction.Library.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <Optimize>true</Optimize>
+    <RegisterForComInterop>true</RegisterForComInterop>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>DCS.Multifunction.Library.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <RegisterForComInterop>true</RegisterForComInterop>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>Signing.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DCS_Multi_DLL.Flooder">
+      <HintPath>..\..\..\..\..\Desktop\DCS_Multi_DLL.Flooder.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Dependancies\Microsoft.WindowsAPICodePack.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data">
+      <HintPath>..\..\..\..\..\Downloads\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data">
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Deployment">
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Management">
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security">
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Speech">
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Windows.Forms">
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml">
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Core">
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="DCS_Multi_DLL" />
+    <Import Include="DCS_Multi_DLL.My" />
+    <Import Include="DCS_Multi_DLL.My.Resources" />
+    <Import Include="Microsoft" />
+    <Import Include="Microsoft.CSharp" />
+    <Import Include="Microsoft.SqlServer" />
+    <Import Include="Microsoft.SqlServer.Server" />
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="Microsoft.VisualBasic.ApplicationServices" />
+    <Import Include="Microsoft.VisualBasic.CompilerServices" />
+    <Import Include="Microsoft.VisualBasic.Devices" />
+    <Import Include="Microsoft.VisualBasic.FileIO" />
+    <Import Include="Microsoft.VisualBasic.Logging" />
+    <Import Include="Microsoft.VisualBasic.MyServices" />
+    <Import Include="Microsoft.VisualBasic.MyServices.Internal" />
+    <Import Include="Microsoft.Win32" />
+    <Import Include="Microsoft.Win32.SafeHandles" />
+    <Import Include="Microsoft.WindowsAPICodePack" />
+    <Import Include="Microsoft.WindowsAPICodePack.ApplicationServices" />
+    <Import Include="Microsoft.WindowsAPICodePack.Dialogs" />
+    <Import Include="Microsoft.WindowsAPICodePack.Net" />
+    <Import Include="Microsoft.WindowsAPICodePack.Shell" />
+    <Import Include="Microsoft.WindowsAPICodePack.Shell.PropertySystem" />
+    <Import Include="MS" />
+    <Import Include="MS.WindowsAPICodePack" />
+    <Import Include="MS.WindowsAPICodePack.Internal" />
+    <Import Include="MySql" />
+    <Import Include="MySql.Data" />
+    <Import Include="MySql.Data.MySqlClient" />
+    <Import Include="MySql.Data.Types" />
+    <Import Include="System" />
+    <Import Include="System.CodeDom" />
+    <Import Include="System.CodeDom.Compiler" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Concurrent" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Collections.ObjectModel" />
+    <Import Include="System.Collections.Specialized" />
+    <Import Include="System.ComponentModel" />
+    <Import Include="System.ComponentModel.Design" />
+    <Import Include="System.ComponentModel.Design.Serialization" />
+    <Import Include="System.Configuration" />
+    <Import Include="System.Configuration.Assemblies" />
+    <Import Include="System.Data" />
+    <Import Include="System.Data.Common" />
+    <Import Include="System.Data.Odbc" />
+    <Import Include="System.Data.OleDb" />
+    <Import Include="System.Data.Sql" />
+    <Import Include="System.Data.SqlClient" />
+    <Import Include="System.Data.SqlTypes" />
+    <Import Include="System.Deployment" />
+    <Import Include="System.Deployment.Application" />
+    <Import Include="System.Deployment.Internal" />
+    <Import Include="System.Diagnostics.CodeAnalysis" />
+    <Import Include="System.Diagnostics.Eventing" />
+    <Import Include="System.Diagnostics.Eventing.Reader" />
+    <Import Include="System.Diagnostics.PerformanceData" />
+    <Import Include="System.Diagnostics.SymbolStore" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Drawing.Design" />
+    <Import Include="System.Drawing.Drawing2D" />
+    <Import Include="System.Drawing.Imaging" />
+    <Import Include="System.Drawing.Printing" />
+    <Import Include="System.Drawing.Text" />
+    <Import Include="System.Dynamic" />
+    <Import Include="System.Globalization" />
+    <Import Include="System.IO" />
+    <Import Include="System.Management" />
+    <Import Include="System.Management.Instrumentation" />
+    <Import Include="System.Media" />
+    <Import Include="System.Net" />
+    <Import Include="System.Net.Sockets" />
+    <Import Include="System.Reflection" />
+    <Import Include="System.Reflection.Emit" />
+    <Import Include="System.Resources" />
+    <Import Include="System.Runtime" />
+    <Import Include="System.Runtime.CompilerServices" />
+    <Import Include="System.Runtime.ConstrainedExecution" />
+    <Import Include="System.Runtime.ExceptionServices" />
+    <Import Include="System.Runtime.Hosting" />
+    <Import Include="System.Runtime.InteropServices" />
+    <Import Include="System.Runtime.Remoting" />
+    <Import Include="System.Runtime.Serialization" />
+    <Import Include="System.Security" />
+    <Import Include="System.Speech" />
+    <Import Include="System.Speech.AudioFormat" />
+    <Import Include="System.Speech.Recognition" />
+    <Import Include="System.Speech.Recognition.SrgsGrammar" />
+    <Import Include="System.Speech.Synthesis" />
+    <Import Include="System.Speech.Synthesis.TtsEngine" />
+    <Import Include="System.Text" />
+    <Import Include="System.Text.RegularExpressions" />
+    <Import Include="System.Threading" />
+    <Import Include="System.Threading.Tasks" />
+    <Import Include="System.Timers" />
+    <Import Include="System.Web" />
+    <Import Include="System.Windows" />
+    <Import Include="System.Windows.Forms" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Windows.Forms.ComponentModel" />
+    <Import Include="System.Windows.Forms.ComponentModel.Com2Interop" />
+    <Import Include="System.Windows.Forms.Design" />
+    <Import Include="System.Windows.Forms.Layout" />
+    <Import Include="System.Windows.Forms.PropertyGridInternal" />
+    <Import Include="System.Windows.Forms.VisualStyles" />
+    <Import Include="System.Xml" />
+    <Import Include="System.Xml.Linq" />
+    <Import Include="System.Xml.Resolvers" />
+    <Import Include="System.Xml.Schema" />
+    <Import Include="System.Xml.Serialization" />
+    <Import Include="System.Xml.Serialization.Advanced" />
+    <Import Include="System.Xml.Serialization.Configuration" />
+    <Import Include="System.Xml.XPath" />
+    <Import Include="System.Xml.Xsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Audio and Video\Play Audio\PlayAudio.vb" />
+    <Compile Include="Audio and Video\Speech\Speech.vb" />
+    <Compile Include="Audio and Video\Webcam\Webcam.vb" />
+    <Compile Include="Devices\Printers and Faxes\netprinter.vb" />
+    <Compile Include="Encryption and Decryption\Checksums\!RSAChecksum.vb" />
+    <Compile Include="Encryption and Decryption\Checksums\!RC2Checksum.vb" />
+    <Compile Include="Encryption and Decryption\Checksums\!TripleDESChecksum.vb" />
+    <Compile Include="Encryption and Decryption\Checksums\!DSAChecksum.vb" />
+    <Compile Include="Encryption and Decryption\Checksums\!DESChecksum.vb" />
+    <Compile Include="Encryption and Decryption\Checksums\!AESChecksum.vb" />
+    <Compile Include="Encryption and Decryption\Checksums\RIPEMDChecksum.vb" />
+    <Compile Include="Encryption and Decryption\Checksums\SHAChecksum.vb" />
+    <Compile Include="Console Effects\ConsoleTools.vb" />
+    <Compile Include="Encryption and Decryption\NEFM\FileEncryption.vb" />
+    <Compile Include="Encryption and Decryption\NEFM\UPCID.vb" />
+    <Compile Include="Form Effects\Controlbox.vb" />
+    <Compile Include="Form Effects\CurveCorners.vb" />
+    <Compile Include="Form Effects\Fades.vb" />
+    <Compile Include="Form Effects\ScreenPosition.vb" />
+    <Compile Include="Form Effects\screensize.vb" />
+    <Compile Include="Form Effects\SmoothSizing.vb" />
+    <Compile Include="Image Coding and Decoding\QRGen.vb" />
+    <Compile Include="Network\Flood.vb" />
+    <Compile Include="Network\Flooder Componets\HTTPFlooder.vb" />
+    <Compile Include="Network\Flooder Componets\XPPFlooder.vb" />
+    <Compile Include="Network\GetIP.vb" />
+    <Compile Include="Network\Ping.vb" />
+    <None Include="Network\Telnet.vb" />
+    <Compile Include="Network\WoL.vb" />
+    <Compile Include="System Information\Hardware\!CPU.vb" />
+    <Compile Include="System Information\Hardware\!GPU.vb" />
+    <Compile Include="System Information\Hardware\Harddisk.vb" />
+    <Compile Include="System Information\Hardware\!Motherboard.vb" />
+    <Compile Include="System Information\Hardware\Power.vb" />
+    <Compile Include="System Information\Hardware\!RAM.vb" />
+    <Compile Include="System Information\Hardware\Temperature.vb" />
+    <Compile Include="System Information\Hardware\!Voltages.vb" />
+    <Compile Include="System Information\OS\VersionInfo.vb" />
+    <Compile Include="System Protection and Security\AVScanner.vb" />
+    <Compile Include="Windows Vista and Windows 7\GlassFull.vb" />
+    <Compile Include="DLL Core Components\DLLAuthentication.vb" />
+    <Compile Include="Audio and Video\Video Conversion and Burning\MultiVideo.vb" />
+    <Compile Include="DLL Core Components\DLLInformation.vb" />
+    <Compile Include="Encryption and Decryption\Checksums\MD5Checksum.vb" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Database\MySQL.vb" />
+    <Compile Include="Encryption and Decryption\Rijndael.vb" />
+    <Compile Include="Audio and Video\Video Conversion and Burning\VideoConversion.vb" />
+    <Compile Include="Windows Vista and Windows 7\Windows 7-Only\Jumplist.vb" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>PublicVbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="DLL Core Components\app.config" />
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="Signing.pfx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="System Information\Software\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Encryption and Decryption\Dependancies\Microsoft.WindowsAPICodePack.dll" />
+    <EmbeddedResource Include="Encryption and Decryption\Dependancies\MySql.Data.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="About.txt" />
+    <None Include="Resources\logo.png" />
+    <None Include="Resources\favicon.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
