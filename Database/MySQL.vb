@@ -18,38 +18,34 @@ Public Module MySQLDBConn
     Dim X As Boolean = False
     Public conn As New MySqlConnection
     Public LastError As String = Nothing
-    Public Function ConnectToDB(ByVal Server As String, ByVal port As Integer, ByVal Username As String, ByVal Password As String, ByVal Database As String)
-        If IsAuthed() = True Then 'DLL is authenticated OK!
-            Try
-                'Set variable values from program/user input
-                aServer = Server
-                aPort = port
-                aUsername = Username
-                aPassword = Password
-                aDatabase = Database
+    Public Function ConnectToDB(ByVal Server As String, ByVal port As Integer, ByVal Username As String, ByVal Password As String, ByVal Database As String) As Boolean
+        Try
+            'Set variable values from program/user input
+            aServer = Server
+            aPort = port
+            aUsername = Username
+            aPassword = Password
+            aDatabase = Database
 
-                'Start a new thread and async connect to the database
-                NewThread = New Threading.Thread(AddressOf Connect)
-                NewThread.Start()
-                Do While X = False
-                    'MsgBox("Still doing") 'Debugging Purposes
-                Loop
-                If Connected = True Then
-                    Return True
-                Else
-                    Return False
-                End If
-            Catch ex As Exception
-                conn.Close()
-                Connected = False
-                LastError = ex.Message.ToString()
+            'Start a new thread and async connect to the database
+            NewThread = New Threading.Thread(AddressOf Connect)
+            NewThread.Start()
+            Do While X = False
+                'MsgBox("Still doing") 'Debugging Purposes
+            Loop
+            If Connected = True Then
+                Return True
+            Else
                 Return False
-            End Try
-        Else
-            Return Nothing
-        End If
+            End If
+        Catch ex As Exception
+            conn.Close()
+            Connected = False
+            LastError = ex.Message.ToString()
+            Return False
+        End Try
     End Function
-    Private Function Connect()
+    Private Function Connect() As Boolean
 Retry:
         Try
             If conn.State = ConnectionState.Closed Then

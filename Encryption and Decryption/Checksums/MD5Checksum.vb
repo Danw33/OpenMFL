@@ -7,11 +7,11 @@ Public Module MD5Checksum
             If Mode = 1 Then
                 Return TextHash(Source)
             ElseIf Mode = 2 Then
-                Return FileHash(Source)
+            Return CStr(FileHash(Source))
             ElseIf Mode = 3 Then
-                Return CompareFile(Source, Checksum)
+            Return CStr(CompareFile(Source, Checksum))
             ElseIf Mode = 4 Then
-                Return CompareText(Source, Checksum)
+            Return CStr(CompareText(Source, Checksum))
             Else
                 Return "Error"
             End If
@@ -32,14 +32,14 @@ Public Module MD5Checksum
             Return ex.Message
         End Try
     End Function
-    Private Function FileHash(ByVal SourceFile As String)
+    Private Function FileHash(ByVal SourceFile As String) As String
         'get the raw MD5 hash of file
         Dim md5 As MD5CryptoServiceProvider = New MD5CryptoServiceProvider
         Dim f As FileStream = New FileStream(SourceFile, FileMode.Open, FileAccess.Read, FileShare.Read, 8192)
         f = New FileStream(SourceFile, FileMode.Open, FileAccess.Read, FileShare.Read, 8192)
         md5.ComputeHash(f)
         Dim ObjFSO As Object = CreateObject("Scripting.FileSystemObject")
-        Dim objFile = ObjFSO.GetFile(SourceFile)
+        Dim objFile = ObjFSO.GetFile(SourceFile) 'OPTION STRICT: Disallows Late Binding :( (Fix?)
 
         'Use Stringbuilder to correctly format Checksum
         Dim hash As Byte() = md5.Hash
@@ -50,14 +50,14 @@ Public Module MD5Checksum
         Next
         Return buff.ToString() 'buff.ToString() is the MD5 Code, return this to sender.
     End Function
-    Private Function CompareFile(ByVal Source As String, ByVal Checksum As String)
+    Private Function CompareFile(ByVal Source As String, ByVal Checksum As String) As Boolean
         If FileHash(Source).Trim = Checksum.Trim Then
             Return True
         Else
             Return False
         End If
     End Function
-    Private Function CompareText(ByVal Source As String, ByVal Checksum As String)
+    Private Function CompareText(ByVal Source As String, ByVal Checksum As String) As Boolean
         If TextHash(Source).Trim = Checksum.Trim Then
             Return True
         Else

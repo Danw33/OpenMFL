@@ -19,7 +19,7 @@ Public Module AVScanner
                 For Each file As String In .GetFiles(dir)
                     CurrentFileName = My.Computer.FileSystem.GetFileInfo(file).FullName.ToString.Trim
 
-                    'MyApp.DoEvents() 'Dont know what its for, but it wont work!
+                    Application.DoEvents()
                     'Dim MD5 As String = Nothing
                     'MD5 = OpenMFL.MD5Checksum.MD5(file, 2, Nothing).ToString.Trim 'get the file's MD5 Checksum
                     Try
@@ -38,7 +38,7 @@ Public Module AVScanner
                 Try
                     For Each folder As Object In .GetDirectories(dir)
                         FoldersProcessed = (FoldersProcessed + 1)
-                        MapDirectory(folder, FormA, ListboxControl)
+                        MapDirectory(CStr(folder), FormA, ListboxControl)
                         ScanInProgress = True
                     Next folder
                 Catch ex As Exception

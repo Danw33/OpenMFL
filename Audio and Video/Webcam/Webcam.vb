@@ -156,22 +156,22 @@ Public Module Webcam
     End Sub
 #End Region
 #Region "Capture"
-    Public Function CaptureImage()
-            Dim data As IDataObject
-            Dim bmap As Bitmap
-            'OpenPreviewWindow(DevList, CamOUTa)
-            SendMessage(hHwnd, WM_CAP_EDIT_COPY, 0, 0)
-            data = Clipboard.GetDataObject()
-            If data.GetDataPresent(GetType(System.Drawing.Bitmap)) Then
-                bmap = CType(data.GetData(GetType(System.Drawing.Bitmap)), Bitmap)
-                'Dim sfdImage = New SaveFileDialog
-                'Trace.Assert(Not (bmap Is Nothing))
-                'If sfdImage.ShowDialog = DialogResult.OK Then
-                '    bmap.Save(sfdImage.FileName, Imaging.ImageFormat.Bmp)
-                'End If
-                Return bmap
-            End If
-            Return Nothing
+    Public Function CaptureImage() As System.Drawing.Bitmap
+        Dim data As IDataObject
+        Dim bmap As Bitmap
+        'OpenPreviewWindow(DevList, CamOUTa)
+        SendMessage(hHwnd, WM_CAP_EDIT_COPY, 0, 0)
+        data = Clipboard.GetDataObject()
+        If data.GetDataPresent(GetType(System.Drawing.Bitmap)) Then
+            bmap = CType(data.GetData(GetType(System.Drawing.Bitmap)), Bitmap)
+            'Dim sfdImage = New SaveFileDialog
+            'Trace.Assert(Not (bmap Is Nothing))
+            'If sfdImage.ShowDialog = DialogResult.OK Then
+            '    bmap.Save(sfdImage.FileName, Imaging.ImageFormat.Bmp)
+            'End If
+            Return bmap
+        End If
+        Return Nothing
     End Function
 #End Region
 #End Region

@@ -4,159 +4,129 @@
     Dim ErrorFatal As Boolean = False
     Dim FORCESTOP As Boolean
     Public Stage As Integer = 0
-    Dim Instdir
-    Dim infile
-    Dim workdir
+    Dim Instdir As String
+    Dim infile As String
+    Dim workdir As String
     Dim BurnDrive As String = "D:"
     Public ABORT As Boolean = False
     Public StatusTitle As String = "DLL LOADED"
     Public StatusText As String = "DLL LOADED: Using Video Conversion Section"
-    Public StatusNumber As String = "0x0"
+    Public StatusNumber As Integer ' = "0x0"
     Public ErrorCounter As Integer = errorcount
     Public ErrorMessage As String = "No error to Report"
     Public BurnStatus As Integer = 0
     Dim ASwitches As Integer, AInstalldirectory As String, AInput As String, AOutFormat As String, AOutput As String
-    Public Function Launcher(ByVal Switches As Integer, ByVal Installdirectory As String, ByVal DVDWriterLetter As String, Optional ByVal Input As String = Nothing, Optional ByVal OutFormat As String = Nothing, Optional ByVal Output As String = "")
-            ASwitches = Switches
-            AInstalldirectory = Installdirectory
-            AInput = Input
-            AOutFormat = OutFormat
-            AOutput = Output
-            BurnStatus = 0
-            FORCESTOP = False
-            ABORT = False
-            Stage = 0
-            errorcount = 0
-            BurnDrive = (DVDWriterLetter.ToString.Trim + ":".ToString).ToString
-            Dim NewThread As Threading.Thread = New Threading.Thread(AddressOf Main)
-            NewThread.Start()
+    Public Function Launcher(ByVal Switches As Integer, ByVal Installdirectory As String, ByVal DVDWriterLetter As String, Optional ByVal Input As String = Nothing, Optional ByVal OutFormat As String = Nothing, Optional ByVal Output As String = "") As String
+        ASwitches = Switches
+        AInstalldirectory = Installdirectory
+        AInput = Input
+        AOutFormat = OutFormat
+        AOutput = Output
+        BurnStatus = 0
+        FORCESTOP = False
+        ABORT = False
+        Stage = 0
+        errorcount = 0
+        BurnDrive = (DVDWriterLetter.ToString.Trim + ":".ToString).ToString
+        Dim NewThread As Threading.Thread = New Threading.Thread(AddressOf Main)
+        NewThread.Start()
 
-            If errorcount = 0 Then
-                Return Nothing
-            Else
-                Return Errormsg
-            End If
+        If errorcount = 0 Then
+            Return Nothing
+        Else
+            Return Errormsg
+        End If
     End Function
-    Private Function Main()
-            'Set things up
-            Instdir = AInstalldirectory
-            errorcount = 0
-            workdir = "C:\Cam2DVD\TempVideo"
-            infile = AInput
+    Private Function Main() As String
+        'Set things up
+        Instdir = AInstalldirectory
+        errorcount = 0
+        workdir = "C:\Cam2DVD\TempVideo"
+        infile = AInput
 
-            'work out what to do
-            Try
-                If ASwitches = 1 Then 'Just Convert
-                    Stage = 1
-                    Dim NewThread As Threading.Thread = New Threading.Thread(AddressOf Convert)
-                    NewThread.Start()
-                ElseIf ASwitches = 2 Then 'Just Burn
-                    Stage = 1
-                    Dim NewThread As Threading.Thread = New Threading.Thread(AddressOf Burn)
-                    NewThread.Start()
-
-
+        'work out what to do
+        Try
+            If ASwitches = 1 Then 'Just Convert
+                Stage = 1
+                Dim NewThread As Threading.Thread = New Threading.Thread(AddressOf Convert)
+                NewThread.Start()
+            ElseIf ASwitches = 2 Then 'Just Burn
+                Stage = 1
+                Dim NewThread As Threading.Thread = New Threading.Thread(AddressOf Burn)
+                NewThread.Start()
 
 
+            ElseIf ASwitches = 3 Then 'Copy, Convert, Move, then Burn
+                Stage = 1
+                Dim NewThread As Threading.Thread = New Threading.Thread(AddressOf C1)
+                NewThread.Start() 'Copy Files
+                Do Until Stage = 2
 
+                Loop
 
+                NewThread = New Threading.Thread(AddressOf Convert)
+                NewThread.Start() 'begin Conversion
+                Do Until Stage = 3
 
+                Loop
 
+                NewThread = New Threading.Thread(AddressOf MakeDVDfs)
+                NewThread.Start() 'begin Making DVD Filesystem
+                Do Until Stage = 4
 
-                ElseIf ASwitches = 3 Then 'Copy, Convert, Move, then Burn
-                    Stage = 1
-                    Dim NewThread As Threading.Thread = New Threading.Thread(AddressOf C1)
-                    NewThread.Start() 'Copy Files
-                    Do Until Stage = 2
-                        If DLLAuthentication.IsAuthed = True Then
-                        Else
-                            FORCESTOP = True
-                            ABORT = True
-                            NewThread.Abort()
-                        End If
-                    Loop
+                Loop
 
-                    NewThread = New Threading.Thread(AddressOf Convert)
-                    NewThread.Start() 'begin Conversion
-                    Do Until Stage = 3
-                        If DLLAuthentication.IsAuthed = True Then
-                        Else
-                            FORCESTOP = True
-                            ABORT = True
-                            NewThread.Abort()
-                        End If
-                    Loop
+                NewThread = New Threading.Thread(AddressOf C2)
+                NewThread.Start() 'Move Files
+                Do Until Stage = 5
 
-                    NewThread = New Threading.Thread(AddressOf MakeDVDfs)
-                    NewThread.Start() 'begin Making DVD Filesystem
-                    Do Until Stage = 4
-                        If DLLAuthentication.IsAuthed = True Then
-                        Else
-                            FORCESTOP = True
-                            ABORT = True
-                            NewThread.Abort()
-                        End If
-                    Loop
+                Loop
 
-                    NewThread = New Threading.Thread(AddressOf C2)
-                    NewThread.Start() 'Move Files
-                    Do Until Stage = 5
-                        If DLLAuthentication.IsAuthed = True Then
-                        Else
-                            FORCESTOP = True
-                            ABORT = True
-                            NewThread.Abort()
-                        End If
-                    Loop
+                NewThread = New Threading.Thread(AddressOf Burn)
+                NewThread.Start() 'burn to DVD Video
+                Do Until Stage = 6
 
-                    NewThread = New Threading.Thread(AddressOf Burn)
-                    NewThread.Start() 'burn to DVD Video
-                    Do Until Stage = 6
-                        If DLLAuthentication.IsAuthed = True Then
-                        Else
-                            FORCESTOP = True
-                            ABORT = True
-                            NewThread.Abort()
-                        End If
-                    Loop
+                Loop
 
-                    'NOTICE:: MultiConvert And MultiBurn aren't currently set up! ###########################
-                ElseIf ASwitches = 4 Then 'MultiConvert
-                    Dim NewThread As Threading.Thread = New Threading.Thread(AddressOf MultiVideo.MultiConvert)
-                    NewThread.Start()
-                ElseIf ASwitches = 5 Then 'MultiBurn
-                    Dim NewThread As Threading.Thread = New Threading.Thread(AddressOf MultiVideo.MultiBurn)
-                    NewThread.Start()
-                ElseIf ASwitches = 6 Then 'MultiConvert then MultiBurn
-                    Dim NewThread As Threading.Thread = New Threading.Thread(AddressOf MultiVideo.MultiConvertandBurn)
-                    NewThread.Start()
+                'NOTICE:: MultiConvert And MultiBurn aren't currently set up! ###########################
+            ElseIf ASwitches = 4 Then 'MultiConvert
+                Dim NewThread As Threading.Thread = New Threading.Thread(AddressOf MultiVideo.MultiConvert)
+                NewThread.Start()
+            ElseIf ASwitches = 5 Then 'MultiBurn
+                Dim NewThread As Threading.Thread = New Threading.Thread(AddressOf MultiVideo.MultiBurn)
+                NewThread.Start()
+            ElseIf ASwitches = 6 Then 'MultiConvert then MultiBurn
+                Dim NewThread As Threading.Thread = New Threading.Thread(AddressOf MultiVideo.MultiConvertandBurn)
+                NewThread.Start()
 
-                ElseIf ASwitches = 7 Then 'Repeat Previous action with same files
-                ElseIf ASwitches = 8 Then 'Create dvd fs from VOB
-                    Dim NewThread As Threading.Thread = New Threading.Thread(AddressOf MakeDVDfs)
-                    NewThread.Start()
-                End If
-            Catch ex As Exception
-                OnError(ex.Message, True, "Main")
-            End Try
-
-
-
-            'Check For Errors During opperation
-            If ErrorCheck() = 0 Then 'All went to plan
-                Return Nothing
-                GoTo Done
-            ElseIf ErrorCheck() >= 1 Then 'Something went wrong
-                Return ErrorMessage.ToString.Trim 'return the error message
+            ElseIf ASwitches = 7 Then 'Repeat Previous action with same files
+            ElseIf ASwitches = 8 Then 'Create dvd fs from VOB
+                Dim NewThread As Threading.Thread = New Threading.Thread(AddressOf MakeDVDfs)
+                NewThread.Start()
             End If
+        Catch ex As Exception
+            OnError(ex.Message, True, "Main")
+        End Try
+
+
+
+        'Check For Errors During opperation
+        If CInt(ErrorCheck()) = 0 Then 'All went to plan
+            Return Nothing
+            GoTo Done
+        ElseIf CInt(ErrorCheck()) >= 1 Then 'Something went wrong
+            Return ErrorMessage.ToString.Trim 'return the error message
+        End If
 
 Done:
     End Function
-    Public Function HookTimer1()
+    Public Function HookTimer1() As Boolean
         If ABORT = True Then
             FORCESTOP = True 'Force stop of process
+            Return True
         Else
             'Carry on as usual
+            Return False
         End If
     End Function
 
@@ -189,12 +159,13 @@ Done:
         Else
         End If
     End Sub 'update Publicly-readable statuses
-    Private Function ErrorCheck()
+    Private Function ErrorCheck() As Integer
         If errorcount = 0 Then 'See if any error(s) have occured
             Return 0 'All ok, return nothing
         ElseIf errorcount >= 1 Then 'on error
             OnError(Errormsg, ErrorFatal, "ErrorCheck")
             Return 1 'return the error message
+        Else : Return 1 'An error with this error check
         End If
     End Function
     '========
@@ -231,22 +202,11 @@ Done:
                 BurnStatus = 2
                 Do Until BurnStatus = 2 'close drive
                     'waiting for disk
-                    If DLLAuthentication.IsAuthed = True Then
-                    Else
-                        FORCESTOP = True
-                        ABORT = True
-                        NewThread.Abort()
-                    End If
-                Loop
+            Loop
                 NewThread = New Threading.Thread(AddressOf DriveIn)
                 NewThread.Start()
                 Do Until BurnStatus = 3 'running growisofs
-                    If DLLAuthentication.IsAuthed = True Then
-                    Else
-                        FORCESTOP = True
-                        ABORT = True
-                        NewThread.Abort()
-                    End If
+
                 Loop
                 Dim Opts As String = ("-dvd-video -Z ".ToString + BurnDrive.ToString + " -r -J -V DVDVideo C:\Cam2DVD\TempVideo\growisofs\".ToString).ToString
                 Dim Total As String = (Instdir.ToString + "\Bin\growisofs.exe".ToString + " ".ToString + Opts.ToString).ToString
@@ -259,7 +219,7 @@ Done:
     End Sub 'Burn The Specified Video file (STAGE 5)
     Private Sub C1()
         Try
-            FileCopy(infile, (workdir + "\In\Input.VIDEO").ToString)
+            FileCopy(infile, (workdir & "\In\Input.VIDEO").ToString)
             Stage = 2
         Catch ex As Exception
             OnError(ex.Message, True, "C1")

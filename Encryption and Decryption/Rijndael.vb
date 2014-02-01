@@ -224,39 +224,39 @@ Public Module RijndaelEncryption
             Catch ex As Exception
             End Try
     End Sub
-    Public Function EncryptFile(ByVal InFile As String, ByVal OutFile As String, ByVal Password As String)
-            'Declare variables for the key and iv.
+    Public Function EncryptFile(ByVal InFile As String, ByVal OutFile As String, ByVal Password As String) As String
+        'Declare variables for the key and iv.
 
-            'The key needs to hold 256 bits and the iv 128 bits.
+        'The key needs to hold 256 bits and the iv 128 bits.
 
-            Dim bytKey As Byte()
-            Dim bytIV As Byte()
-            'Send the password to the CreateKey function.
+        Dim bytKey As Byte()
+        Dim bytIV As Byte()
+        'Send the password to the CreateKey function.
 
-            bytKey = CreateKey(Password)
-            'Send the password to the CreateIV function.
+        bytKey = CreateKey(Password)
+        'Send the password to the CreateIV function.
 
-            bytIV = CreateIV(Password)
-            'Start the encryption.
+        bytIV = CreateIV(Password)
+        'Start the encryption.
 
-            EncryptOrDecryptFile(InFile, OutFile, bytKey, bytIV, CryptoAction.ActionEncrypt)
-            Return Nothing
+        EncryptOrDecryptFile(InFile, OutFile, bytKey, bytIV, CryptoAction.ActionEncrypt)
+        Return Nothing
     End Function
-    Public Function DecryptFile(ByVal InFile As String, ByVal OutFile As String, ByVal Password As String)
-            'Declare variables for the key and iv.
+    Public Function DecryptFile(ByVal InFile As String, ByVal OutFile As String, ByVal Password As String) As String
+        'Declare variables for the key and iv.
 
-            'The key needs to hold 256 bits and the iv 128 bits.
-            Dim bytKey As Byte()
-            Dim bytIV As Byte()
-            'Send the password to the CreateKey function.
+        'The key needs to hold 256 bits and the iv 128 bits.
+        Dim bytKey As Byte()
+        Dim bytIV As Byte()
+        'Send the password to the CreateKey function.
 
-            bytKey = CreateKey(Password)
-            'Send the password to the CreateIV function.
+        bytKey = CreateKey(Password)
+        'Send the password to the CreateIV function.
 
-            bytIV = CreateIV(Password)
-            'Start the encryption.
+        bytIV = CreateIV(Password)
+        'Start the encryption.
 
-            EncryptOrDecryptFile(InFile, OutFile, bytKey, bytIV, CryptoAction.ActionDecrypt)
-            Return Nothing
+        EncryptOrDecryptFile(InFile, OutFile, bytKey, bytIV, CryptoAction.ActionDecrypt)
+        Return Nothing
     End Function
 End Module

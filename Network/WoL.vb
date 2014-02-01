@@ -16,31 +16,31 @@ Public Class WakeOnLan
     Public Function Wake(ByVal sender As System.Object, ByVal e As System.EventArgs, _
                     ByVal MAC As String, ByVal IP As String, _
                     Optional ByVal Subnet As String = "255.255.255.0", _
-                    Optional ByVal Port As Integer = 7)
-            'Set Variables
-            'edtMac = MAC
-            'edtIpAddress = IP.ToString
-            'edtSubnetMask = Subnet
-            'edtPortNo = Port.ToText
+                    Optional ByVal Port As Integer = 7) As String
+        'Set Variables
+        'edtMac = MAC
+        'edtIpAddress = IP.ToString
+        'edtSubnetMask = Subnet
+        'edtPortNo = Port.ToText
 
-            'Run Commands
-            Try
-                WakeClient(sender, e)
-            Catch ex As Exception
-                Message = ex.Message.ToString
-            End Try
-            Return Message
+        'Run Commands
+        Try
+            WakeClient(sender, e)
+        Catch ex As Exception
+            Message = ex.Message.ToString
+        End Try
+        Return Message
     End Function
     Private Function InvertBinary(ByVal x As String) As String
-            Dim ch As Char
-            Dim len As Integer = CStr(x).Length
-            For Each ch In CStr(x)
-                If ch = "1" Then
-                    InvertBinary += "0"
-                Else
-                    InvertBinary += "1"
-                End If
-            Next
+        Dim ch As Char
+        Dim len As Integer = CStr(x).Length
+        For Each ch In CStr(x)
+            If ch = "1" Then
+                InvertBinary += "0"
+            Else
+                InvertBinary += "1"
+            End If
+        Next
     End Function
     Private Function OrIt(ByVal x As Long, ByVal y As Long) As String
         'Pad out
@@ -66,7 +66,7 @@ Public Class WakeOnLan
     Private Function ToBinary(ByVal x As Long) As String
         Dim temp As String = ""
         Do
-            If x Mod 2 Then
+            If CBool(x Mod 2) Then
                 temp = "1" + temp
             Else
                 temp = "0" + temp
@@ -92,7 +92,7 @@ Public Class WakeOnLan
                 multiply = multiply * 2
             Next
             multiply = CInt(ch.ToString) * multiply
-            temp = multiply + temp
+            temp = CStr(multiply + CDbl(temp))
             subtract = subtract + 1
             multiply = 1
         Next
@@ -103,7 +103,7 @@ Public Class WakeOnLan
             Dim buf(101) As Char
             Dim sendBytes As [Byte]() = Encoding.ASCII.GetBytes(buf)
             For x As Integer = 0 To 5
-                sendBytes(x) = CInt("&HFF")
+            sendBytes(x) = CByte(CInt("&HFF"))
             Next
 
             Dim MacAddress As String
@@ -111,12 +111,12 @@ Public Class WakeOnLan
 
             Dim i As Integer = 6
             For x As Integer = 1 To 16
-                sendBytes(i) = CInt("&H" + MacAddress.Substring(0, 2))
-                sendBytes(i + 1) = CInt("&H" + MacAddress.Substring(2, 2))
-                sendBytes(i + 2) = CInt("&H" + MacAddress.Substring(4, 2))
-                sendBytes(i + 3) = CInt("&H" + MacAddress.Substring(6, 2))
-                sendBytes(i + 4) = CInt("&H" + MacAddress.Substring(8, 2))
-                sendBytes(i + 5) = CInt("&H" + MacAddress.Substring(10, 2))
+            sendBytes(i) = CByte(CInt("&H" + MacAddress.Substring(0, 2)))
+            sendBytes(i + 1) = CByte(CInt("&H" + MacAddress.Substring(2, 2)))
+            sendBytes(i + 2) = CByte(CInt("&H" + MacAddress.Substring(4, 2)))
+            sendBytes(i + 3) = CByte(CInt("&H" + MacAddress.Substring(6, 2)))
+            sendBytes(i + 4) = CByte(CInt("&H" + MacAddress.Substring(8, 2)))
+            sendBytes(i + 5) = CByte(CInt("&H" + MacAddress.Substring(10, 2)))
                 i += 6
             Next
 
@@ -154,8 +154,8 @@ Public Class WakeOnLan
                         sm4 = Convert.ToInt64(mySubnetArray(i))
                 End Select
             Next
-            myAddress = ToInteger(OrIt(ToBinary(a), InvertBinary(ToBinary(sm1)))) & "." & ToInteger(OrIt(ToBinary(b), InvertBinary(ToBinary(sm2)))) & _
-        "." & ToInteger(OrIt(ToBinary(c), InvertBinary(ToBinary(sm3)))) & "." & ToInteger(OrIt(ToBinary(d), InvertBinary(ToBinary(sm4))))
+        myAddress = ToInteger(CLng(OrIt(CLng(ToBinary(a)), CLng(InvertBinary(ToBinary(sm1)))))) & "." & ToInteger(CLng(OrIt(CLng(ToBinary(b)), CLng(InvertBinary(ToBinary(sm2)))))) & _
+        "." & ToInteger(CLng(OrIt(CLng(ToBinary(c)), CLng(InvertBinary(ToBinary(sm3)))))) & "." & ToInteger(CLng(OrIt(CLng(ToBinary(d)), CLng(InvertBinary(ToBinary(sm4))))))
 
 
             'udpClient.Send(sendBytes, sendBytes.Length, myAddress, CInt(edtPortNo.Text))

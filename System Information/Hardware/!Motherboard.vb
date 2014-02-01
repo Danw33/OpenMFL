@@ -1,5 +1,5 @@
 ﻿Module Motherboard
-    Public Function HWDetail(ByVal WhatDetails As Motherboard.Detail)
+    Public Function HWDetail(ByVal WhatDetails As Motherboard.Detail) As String
         If IsAuthed() = True Then
             Return MBDetails2(WhatDetails)
         Else
@@ -7,7 +7,7 @@
             Return "UNAUTHORIZED PROGRAM"
         End If
     End Function
-    Private Function MBDetails2(ByVal WhatDetails As Motherboard.Detail)
+    Private Function MBDetails2(ByVal WhatDetails As Motherboard.Detail) As String
 
     End Function
     Public Enum Detail

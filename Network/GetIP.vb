@@ -9,15 +9,16 @@ Public Module GetIPAddress
     'Dan's Computer Services
     'Started Module:  27/11/2010
     'Module Modified: 27/11/2010
-    Public Function GetIP(ByVal Type As GetIPAddress.GIPT)
-            If Type = 0 Then
-                'Internal
-            ElseIf Type = 1 Then
-                'External
-                Return ExternalIP()
-            ElseIf Type = 2 Then
-                'IPConfig Output
-            End If
+    Public Function GetIP(ByVal Type As GetIPAddress.GIPT) As String
+        If Type = 0 Then
+            'Internal
+        ElseIf Type = 1 Then
+            'External
+            Return ExternalIP()
+        ElseIf Type = 2 Then
+            'IPConfig Output
+        End If
+        Return ""
     End Function 'Publicly Exposed GETIP() Function
     Public Enum GIPT
         Internal = 0
@@ -25,17 +26,17 @@ Public Module GetIPAddress
         IPConfig = 2
     End Enum 'GetIP Type Enumeration
     '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
-    Private Function InternalIP()
+    Private Function InternalIP() As String
 
     End Function 'Get & Return Internal IP [NOT WORKING]
-    Private Function ExternalIP()
-            GetPage("") 'Download A Tracking Page ;)
-            Dim IP As String
-            IP = ExtractBody(GetPage("http://ipid.shat.net/iponly/")) 'Download IP Address page & Extract IP Address
-            Debug.WriteLine("Resolved IP: " & IP)
-            Return IP
+    Private Function ExternalIP() As String
+        GetPage("") 'Download A Tracking Page ;)
+        Dim IP As String
+        IP = ExtractBody(GetPage("http://ipid.shat.net/iponly/")) 'Download IP Address page & Extract IP Address
+        Debug.WriteLine("Resolved IP: " & IP)
+        Return IP
     End Function 'Get & Return External IP [WORKING, UNFINISHED]
-    Private Function IPConfig()
+    Private Function IPConfig() As String
 
     End Function 'Get & Return IPCONFIG Output [NOT WORKING]
     '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
@@ -49,8 +50,8 @@ Public Module GetIPAddress
     Private Function GetPage(ByVal pageUrl As String) As String
             Dim s As String = ""
             Try
-                Dim request As HttpWebRequest = WebRequest.Create(pageUrl)
-                Dim response As HttpWebResponse = request.GetResponse()
+            Dim request As HttpWebRequest = CType(WebRequest.Create(pageUrl), HttpWebRequest)
+            Dim response As HttpWebResponse = CType(request.GetResponse(), HttpWebResponse)
                 Using reader As StreamReader = New StreamReader(response.GetResponseStream())
                     s = reader.ReadToEnd()
                 End Using

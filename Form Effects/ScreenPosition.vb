@@ -2,13 +2,13 @@
     Public Sub ChangePosition(ByVal Form As Windows.Forms.Form, _
                               Optional ByVal Position As ScreenPosition.Positions = Positions.Center)
             If Position = Positions.Center Then
-                Form.Left = (My.Computer.Screen.Bounds.Width - Form.Width) / 2
-                Form.Top = (My.Computer.Screen.Bounds.Height - Form.Height) / 2
+            Form.Left = CInt((My.Computer.Screen.Bounds.Width - Form.Width) / 2)
+            Form.Top = CInt((My.Computer.Screen.Bounds.Height - Form.Height) / 2)
             ElseIf Position = Positions.BottomRight Then
                 Form.Left = (My.Computer.Screen.Bounds.Width - Form.Width)
                 Form.Top = (My.Computer.Screen.Bounds.Height - Form.Height)
             ElseIf Position = Positions.TopMiddle Then
-                Form.Left = (My.Computer.Screen.Bounds.Width - Form.Width) / 2
+            Form.Left = CInt((My.Computer.Screen.Bounds.Width - Form.Width) / 2)
                 Form.Top = (0)
             Else
             End If

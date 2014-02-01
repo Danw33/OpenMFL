@@ -8,16 +8,17 @@ Imports System.Speech.AudioFormat
 
 Public Module SpeechModule
     Public Class VocalSynthesis 'Class for Computer-Synthesized Vocal Output (By Daniel Wilson, 15/03/2012)
-        Public Shared Function SynthSpeak(ByVal WhatToSpeak As String, sender As System.Object, e As System.EventArgs)
-                Try
-                    Dim SpeechSynth As New SpeechSynthesizer() 'New Synthesizer
-                    SpeechSynth.Rate = 1 'Speed
-                    SpeechSynth.Volume = 98 'Volume (1 - 100)
-                    SpeechSynth.Speak(WhatToSpeak.ToString.Trim()) 'Speak!
-                    Return True 'Done!
-                Catch ex As Exception
-                    Return ex
-                End Try
+        Public Shared Function SynthSpeak(ByVal WhatToSpeak As String, sender As System.Object, e As System.EventArgs) As Boolean
+            Try
+                Dim SpeechSynth As New SpeechSynthesizer() 'New Synthesizer
+                SpeechSynth.Rate = 1 'Speed
+                SpeechSynth.Volume = 98 'Volume (1 - 100)
+                SpeechSynth.Speak(WhatToSpeak.ToString.Trim()) 'Speak!
+                Return True 'Done!
+            Catch ex As Exception
+                Debug.WriteLine(ex.Message)
+                Return False
+            End Try
         End Function
     End Class
     Public Class SpeechRecognition 'Class for Computerised ASR (Automated Speech Recognition) (By Daniel Wilson, 15/03/2012)
@@ -36,10 +37,12 @@ Public Module SpeechModule
                     Return ex
                 End Try
         End Function
-        Public Shared Function SpeechListenerStop(sender As System.Object, e As System.EventArgs)
+        Public Shared Function SpeechListenerStop(sender As System.Object, e As System.EventArgs) As Boolean
             If SpeechEars.AudioState <> Recognition.AudioState.Stopped Then
                 SpeechEars.RecognizeAsyncStop()
+                Return True
             End If
+            Return False
         End Function
 
 

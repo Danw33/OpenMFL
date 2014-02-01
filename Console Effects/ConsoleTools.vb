@@ -30,7 +30,7 @@ Public Module ConsoleTools
 
     Public Sub SetConsoleColors(ByVal forecolor As ConsoleColor, ByVal backcolor As ConsoleColor)
             Dim hConsole As Integer = GetStdHandle(STD_OUTPUT_HANDLE)
-            backcolor = IIf(backcolor = 0, 256, backcolor * 16)
+        backcolor = CType(IIf(backcolor = 0, 256, backcolor * 16), ConsoleColor)
             SetConsoleTextAttribute(hConsole, forecolor Or backcolor)
     End Sub
 

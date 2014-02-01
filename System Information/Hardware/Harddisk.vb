@@ -6,29 +6,30 @@ Imports System.Management
 Imports System.Runtime.InteropServices
 Module Harddisk
     Public Class HDDBasic
-        Public Function HDDDetails(ByVal WhatDetails As HDDBasic.Detail)
-                Return HDDDetails2(WhatDetails)
+        Public Function HDDDetails(ByVal WhatDetails As HDDBasic.Detail) As String
+            Return HDDDetails2(WhatDetails)
         End Function
-        Private Function HDDDetails2(ByVal WhatDetails As HDDBasic.Detail)
-                For Each HddDrive As System.IO.DriveInfo In My.Computer.FileSystem.Drives
-                    If WhatDetails = HDDBasic.Detail.SerialNumber Then
+        Private Function HDDDetails2(ByVal WhatDetails As HDDBasic.Detail) As String
+            For Each HddDrive As System.IO.DriveInfo In My.Computer.FileSystem.Drives
+                If WhatDetails = HDDBasic.Detail.SerialNumber Then
 
-                    ElseIf WhatDetails = HDDBasic.Detail.Manufacturer Then
+                ElseIf WhatDetails = HDDBasic.Detail.Manufacturer Then
 
-                    ElseIf WhatDetails = HDDBasic.Detail.Model Then
+                ElseIf WhatDetails = HDDBasic.Detail.Model Then
 
-                    ElseIf WhatDetails = HDDBasic.Detail.Submodel Then
+                ElseIf WhatDetails = HDDBasic.Detail.Submodel Then
 
-                    ElseIf WhatDetails = HDDBasic.Detail.Version Then
+                ElseIf WhatDetails = HDDBasic.Detail.Version Then
 
-                    ElseIf WhatDetails = HDDBasic.Detail.TotalSize Then
-                        Return Convert.ToInt32(HddDrive.TotalSize)
-                    ElseIf WhatDetails = HDDBasic.Detail.RemainingSize Then
-                        Return Convert.ToInt32(HddDrive.AvailableFreeSpace)
-                    ElseIf WhatDetails = HDDBasic.Detail.UsedSize Then
-                        Return Convert.ToInt32(HddDrive.TotalSize - HddDrive.AvailableFreeSpace)
-                    End If
-                Next
+                ElseIf WhatDetails = HDDBasic.Detail.TotalSize Then
+                    Return CStr(Convert.ToInt32(HddDrive.TotalSize))
+                ElseIf WhatDetails = HDDBasic.Detail.RemainingSize Then
+                    Return CStr(Convert.ToInt32(HddDrive.AvailableFreeSpace))
+                ElseIf WhatDetails = HDDBasic.Detail.UsedSize Then
+                    Return CStr(Convert.ToInt32(HddDrive.TotalSize - HddDrive.AvailableFreeSpace))
+                Else : Return ""
+                End If
+            Next
         End Function
         Public Enum Detail
             SerialNumber

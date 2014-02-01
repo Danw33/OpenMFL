@@ -9,14 +9,14 @@
     ''' <remarks></remarks>
 
     Public Sub AddNetworkPrinter(ByRef printerName As String, ByRef networkPath As String, _
-     Optional ByRef useExistingDriver As Boolean = 0, Optional ByRef setDefaultPrinter As Boolean = 0)
-            Dim cmdToSend As String = "rundll32 printui.dll,PrintUIEntry /in /m " & Chr(34) & printerName & Chr(34) & " /f " & networkPath
-            If useExistingDriver Then cmdToSend += " /u" '  /u = use the existing printer driver if it's already installed
-            If setDefaultPrinter Then cmdToSend += " /y" '  /y = set printer as the default
-            Process.Start(cmdToSend) ' execute the command
-            Threading.Thread.Sleep(50)
-            Threading.Thread.Sleep(50)
-            Threading.Thread.Sleep(50)
-            Threading.Thread.Sleep(50)
+     Optional ByRef useExistingDriver As Boolean = CBool(0), Optional ByRef setDefaultPrinter As Boolean = CBool(0))
+        Dim cmdToSend As String = "rundll32 printui.dll,PrintUIEntry /in /m " & Chr(34) & printerName & Chr(34) & " /f " & networkPath
+        If useExistingDriver Then cmdToSend += " /u" '  /u = use the existing printer driver if it's already installed
+        If setDefaultPrinter Then cmdToSend += " /y" '  /y = set printer as the default
+        Process.Start(cmdToSend) ' execute the command
+        Threading.Thread.Sleep(50)
+        Threading.Thread.Sleep(50)
+        Threading.Thread.Sleep(50)
+        Threading.Thread.Sleep(50)
     End Sub
 End Module

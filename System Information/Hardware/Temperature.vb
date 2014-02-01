@@ -18,13 +18,13 @@ Public Module Temperature
                     'Resolve Raw data into human-readable temperature measurement
                     Select Case Format
                         Case TempFormat.Fahrenheit
-                            Return CSng((obj.Item("CurrentTemperature") / 10 - 273.15) * 9 / 5 + 32)
+                        Return CSng((CInt(obj.Item("CurrentTemperature")) / 10 - 273.15) * 9 / 5 + 32)
                         Case TempFormat.Celsius
-                            Return CSng(obj.Item("CurrentTemperature") / 10 - 273.15)
+                        Return CSng(CInt(obj.Item("CurrentTemperature")) / 10 - 273.15)
                         Case TempFormat.Kelvin
-                            Return CSng(obj.Item("CurrentTemperature") / 10)
+                        Return CSng(CInt(obj.Item("CurrentTemperature")) / 10)
                         Case TempFormat.Raw
-                            Return CSng(obj.Item("CurrentTemperature"))
+                        Return CSng(obj.Item("CurrentTemperature"))
                     End Select
                 End While
             Catch ex As Exception

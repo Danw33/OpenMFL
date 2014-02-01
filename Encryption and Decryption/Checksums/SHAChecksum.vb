@@ -3,39 +3,39 @@ Imports System.Security.Cryptography
 Imports System.Text
 
 Public Module SHAChecksum
-    Public Function GetChecksumfromFile(ByVal file As String, ByVal SHAVersion As String, Optional ByVal SHASubType As String = Nothing)
-            If SHAVersion = "SHA" Or SHAVersion = "SHA0" Or SHAVersion = 0 Then
-                Return "SHA0 Is too old, Not included in this release!"
-            ElseIf SHAVersion = "SHA1" Or SHAVersion = 1 Then
-                Return SHA1(file)
-            ElseIf SHAVersion = "SHA2" Or SHAVersion = 2 Then
-                Return SHA2(file, SHASubType)
-            ElseIf SHAVersion = "SHA3" Or SHAVersion = 3 Then
-                Return "SHA3 Is not Publicly available yet!"
-            End If
-            Return "Unknown SHA Version Specified"
+    Public Function GetChecksumfromFile(ByVal file As String, ByVal SHAVersion As String, Optional ByVal SHASubType As String = Nothing) As String
+        If SHAVersion = "SHA" Or SHAVersion = "SHA0" Or CDbl(SHAVersion) = 0 Then
+            Return "SHA0 Is too old, Not included in this release!"
+        ElseIf SHAVersion = "SHA1" Or CDbl(SHAVersion) = 1 Then
+            Return SHA1(file)
+        ElseIf SHAVersion = "SHA2" Or CDbl(SHAVersion) = 2 Then
+            Return CStr(SHA2(file, SHASubType))
+        ElseIf SHAVersion = "SHA3" Or CDbl(SHAVersion) = 3 Then
+            Return "SHA3 Is not Publicly available yet!"
+        End If
+        Return "Unknown SHA Version Specified"
     End Function
-    Private Function SHA1(ByVal File As String)
+    Private Function SHA1(ByVal File As String) As String
         Dim FileStream As Stream = IO.File.OpenRead(File)
         Dim SHA As SHA1 = New SHA1Managed()
         Dim checksum() As Byte = SHA.ComputeHash(FileStream)
         Return BitConverter.ToString(checksum).Replace("-", String.Empty)
     End Function 'SHA1
-    Private Function SHA2(ByVal File As String, ByVal SHA2Subtype As String)
+    Private Function SHA2(ByVal File As String, ByVal SHA2Subtype As String) As String
         Dim FileStream As Stream = IO.File.OpenRead(File)
         'Dim SHA224 As SHA224 = New SHA224Managed() - Not Supported by .NET ?
         Dim SHA256 As SHA256 = New SHA256Managed()
         Dim SHA384 As SHA384 = New SHA384Managed()
         Dim SHA512 As SHA512 = New SHA512Managed()
-        If SHA2Subtype = "" Or SHA2Subtype = 224 Then
+        If SHA2Subtype = "" Or CDbl(SHA2Subtype) = 224 Then
             Return "Unsupported SHA2 Version"
-        ElseIf SHA2Subtype = "SHA256" Or SHA2Subtype = 256 Then
+        ElseIf SHA2Subtype = "SHA256" Or CDbl(SHA2Subtype) = 256 Then
             Dim checksum() As Byte = SHA256.ComputeHash(FileStream)
             Return BitConverter.ToString(checksum).Replace("-", String.Empty)
-        ElseIf SHA2Subtype = "SHA384" Or SHA2Subtype = 384 Then
+        ElseIf SHA2Subtype = "SHA384" Or CDbl(SHA2Subtype) = 384 Then
             Dim checksum() As Byte = SHA384.ComputeHash(FileStream)
             Return BitConverter.ToString(checksum).Replace("-", String.Empty)
-        ElseIf SHA2Subtype = "SHA512" Or SHA2Subtype = 512 Then
+        ElseIf SHA2Subtype = "SHA512" Or CDbl(SHA2Subtype) = 512 Then
             Dim checksum() As Byte = SHA512.ComputeHash(FileStream)
             Return BitConverter.ToString(checksum).Replace("-", String.Empty)
         Else

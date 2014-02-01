@@ -25,9 +25,11 @@
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
     <DocumentationFile>OpenMFL.xml</DocumentationFile>
-    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</NoWarn>
     <Optimize>true</Optimize>
     <RegisterForComInterop>true</RegisterForComInterop>
+    <WarningsAsErrors>
+    </WarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -37,9 +39,11 @@
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DocumentationFile>OpenMFL.xml</DocumentationFile>
-    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</NoWarn>
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <RegisterForComInterop>true</RegisterForComInterop>
+    <WarningsAsErrors>
+    </WarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup>
     <OptionExplicit>On</OptionExplicit>
@@ -72,57 +76,57 @@
     </Reference>
     <Reference Include="System">
       <EmbedInteropTypes>False</EmbedInteropTypes>
-      <Private>True</Private>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System.Data">
       <EmbedInteropTypes>False</EmbedInteropTypes>
-      <Private>True</Private>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System.Deployment">
       <EmbedInteropTypes>False</EmbedInteropTypes>
-      <Private>True</Private>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System.Drawing">
       <EmbedInteropTypes>False</EmbedInteropTypes>
-      <Private>True</Private>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System.Management">
       <EmbedInteropTypes>False</EmbedInteropTypes>
-      <Private>True</Private>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System.Security">
       <EmbedInteropTypes>False</EmbedInteropTypes>
-      <Private>True</Private>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System.Speech">
       <EmbedInteropTypes>False</EmbedInteropTypes>
-      <Private>True</Private>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System.Windows.Forms">
       <EmbedInteropTypes>False</EmbedInteropTypes>
-      <Private>True</Private>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System.Xml">
       <EmbedInteropTypes>False</EmbedInteropTypes>
-      <Private>True</Private>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System.Core">
       <EmbedInteropTypes>False</EmbedInteropTypes>
-      <Private>True</Private>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System.Xml.Linq">
       <EmbedInteropTypes>False</EmbedInteropTypes>
-      <Private>True</Private>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System.Data.DataSetExtensions">
       <EmbedInteropTypes>False</EmbedInteropTypes>
-      <Private>True</Private>
+      <Private>False</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Import Include="DCS_Multi_DLL" />
-    <Import Include="DCS_Multi_DLL.My" />
-    <Import Include="DCS_Multi_DLL.My.Resources" />
+    <Import Include="OpenMFL" />
+    <Import Include="OpenMFL.My" />
+    <Import Include="OpenMFL.My.Resources" />
     <Import Include="Microsoft" />
     <Import Include="Microsoft.CSharp" />
     <Import Include="Microsoft.SqlServer" />

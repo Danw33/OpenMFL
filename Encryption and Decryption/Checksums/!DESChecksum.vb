@@ -1,7 +1,7 @@
 ﻿Imports System.IO
 Imports System.Security.Cryptography
 Public Module DESChecksum
-    Public Function GetChecksumfromFile(ByVal file As String)
+    Public Function GetChecksumfromFile(ByVal file As String) As String
         If IsAuthed() = True Then
             'Return DESfile(file)
             Return "DES Does Not Suport File Checksums"

@@ -86,7 +86,7 @@ Public Class HTTPFlooder
         End Try
     End Sub
     Private Shared Function Tick() As Long
-        Return (DateTime.Now.Ticks / 10000)
+        Return CLng((DateTime.Now.Ticks / 10000))
     End Function
     Public Enum ReqState
 

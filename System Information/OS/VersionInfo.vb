@@ -3,8 +3,8 @@ Imports System.OperatingSystem
 Public Module OSInfo
     Public Function GetOSName() As String
             Dim OSFriendlyName As System.String = Nothing
-            Dim Obj As System.OperatingSystem
-            OSFriendlyName = Obj.Platform
+        Dim Obj As System.OperatingSystem
+        OSFriendlyName = CStr(Obj.Platform)
             Return OSFriendlyName
     End Function
     Public Function GetOSVersion() As String
