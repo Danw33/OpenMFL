@@ -18,7 +18,6 @@ Public Module RijndaelEncryption
 
     'Text/String Encryption
     Public Function EncryptString128Bit(ByVal vstrTextToBeEncrypted As String, ByVal vstrEncryptionKey As String, ByVal AuthKey As String) As String
-        If AuthKey.ToString.Trim = "4EF1F2E236BD5D7B5BB0AA925794887AE8D53A6705AB456162A81F07D2DEA427" Then
             Dim A As String = vstrEncryptionKey.ToString
             Dim B As String = vstrTextToBeEncrypted.ToString
             Dim bytValue() As Byte
@@ -54,15 +53,8 @@ Public Module RijndaelEncryption
                 Return Convert.ToBase64String(bytEncoded)
             Catch
             End Try
-        Else
-            MsgBox("Invalid Auth Key, You are not authorised to use this Encryption DLL" + vbCrLf + "Copyright Daniel Wilson, Dan's Computer Services 2010 - 2012.", "Encryption DLL - Unauthorized")
-            Die()
-            Return "UNAUTHORIZED"
-        End If
-
     End Function
     Public Function DecryptString128Bit(ByVal vstrStringToBeDecrypted As String, ByVal vstrDecryptionKey As String, ByVal AuthKey As String) As String
-        If AuthKey.ToString = "4EF1F2E236BD5D7B5BB0AA925794887AE8D53A6705AB456162A81F07D2DEA427" Then
             Dim A As String = vstrDecryptionKey.ToString
             Dim B As String = vstrStringToBeDecrypted.ToString
             Dim bytDataToBeDecrypted() As Byte
@@ -100,15 +92,8 @@ Public Module RijndaelEncryption
             Catch
             End Try
             Return StripNullCharacters(Encoding.ASCII.GetString(bytTemp))
-        Else
-            MsgBox("Invalid Auth Key, You are not authorised to use this Encryption DLL" + vbCrLf + "Copyright Daniel Wilson, Dan's Computer Services 2010 - 2012.", "Encryption DLL - Unauthorized")
-            Die()
-            Return "UNAUTHORIZED"
-        End If
-
     End Function
     Public Function StripNullCharacters(ByVal vstrStringWithNulls As String) As String
-        If IsAuthed() = True Then
             Dim intPosition As Integer
             Dim strStringWithOutNulls As String
             intPosition = 1
@@ -124,9 +109,6 @@ Public Module RijndaelEncryption
                 End If
             Loop
             Return strStringWithOutNulls
-        Else
-            Return "UNAUTHORIZED"
-        End If
     End Function
 
     'File Encryption
@@ -134,7 +116,6 @@ Public Module RijndaelEncryption
         '*************************
         '** Create A Key
         '*************************
-        If IsAuthed() = True Then
             'Convert strPassword to an array and store in chrData.
             Dim chrData() As Char = strPassword.ToCharArray
             'Use intLength to get strPassword size.
@@ -158,15 +139,11 @@ Public Module RijndaelEncryption
                 bytKey(i) = bytResult(i)
             Next
             Return bytKey 'Return the key.
-        Else
-            Die()
-        End If
     End Function
     Private Function CreateIV(ByVal strPassword As String) As Byte()
         '*************************
         '** Create An IV
         '*************************
-        If IsAuthed() = True Then
             'Convert strPassword to an array and store in chrData.
             Dim chrData() As Char = strPassword.ToCharArray
             'Use intLength to get strPassword size.
@@ -190,9 +167,6 @@ Public Module RijndaelEncryption
                 bytIV(i - 32) = bytResult(i)
             Next
             Return bytIV 'Return the IV.
-        Else
-            Die()
-        End If
     End Function
     Private Enum CryptoAction
         'Define the enumeration for CryptoAction.
@@ -204,7 +178,6 @@ Public Module RijndaelEncryption
         '****************************
         '** Encrypt/Decrypt File
         '****************************
-        If IsAuthed() = True Then
             Try 'In case of errors.
                 'Setup file streams to handle input and output.
                 fsInput = New System.IO.FileStream(strInputFile, FileMode.Open, FileAccess.Read)
@@ -250,12 +223,8 @@ Public Module RijndaelEncryption
                 fsOutput.Close()
             Catch ex As Exception
             End Try
-        Else
-            Die()
-        End If
     End Sub
     Public Function EncryptFile(ByVal InFile As String, ByVal OutFile As String, ByVal Password As String)
-        If IsAuthed() = True Then
             'Declare variables for the key and iv.
 
             'The key needs to hold 256 bits and the iv 128 bits.
@@ -272,12 +241,8 @@ Public Module RijndaelEncryption
 
             EncryptOrDecryptFile(InFile, OutFile, bytKey, bytIV, CryptoAction.ActionEncrypt)
             Return Nothing
-        Else
-            Return Die()
-        End If
     End Function
     Public Function DecryptFile(ByVal InFile As String, ByVal OutFile As String, ByVal Password As String)
-        If IsAuthed() = True Then
             'Declare variables for the key and iv.
 
             'The key needs to hold 256 bits and the iv 128 bits.
@@ -293,8 +258,5 @@ Public Module RijndaelEncryption
 
             EncryptOrDecryptFile(InFile, OutFile, bytKey, bytIV, CryptoAction.ActionDecrypt)
             Return Nothing
-        Else
-            Return Die()
-        End If
     End Function
 End Module

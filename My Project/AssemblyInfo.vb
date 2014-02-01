@@ -10,12 +10,12 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("Dan's Computer Services Multi-Function DLL")> 
-<Assembly: AssemblyDescription("An Open-Source Library of Many Functions")> 
+<Assembly: AssemblyTitle("OpenMFL")> 
+<Assembly: AssemblyDescription("The Open Multi-Function Library for .NET")> 
 <Assembly: AssemblyCompany("Dan's Computer Services")> 
-<Assembly: AssemblyProduct("Dan's Computer Services Multi-Function DLL")> 
+<Assembly: AssemblyProduct("OpenMFL")> 
 <Assembly: AssemblyCopyright("Copyright © Daniel Wilson 2010 - 2014. Licensed under the GNU GPLv3.")> 
-<Assembly: AssemblyTrademark("DCS")> 
+<Assembly: AssemblyTrademark("OpenMFL")> 
 
 <Assembly: ComVisible(True)> 
 

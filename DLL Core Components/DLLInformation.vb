@@ -1,6 +1,5 @@
 ﻿Public Module DLLInformation
     Public Function DLLInfoMain(ByVal InformationRequested As String)
-        If IsAuthed() = True Then
             If InformationRequested = "Version" Then
                 Return Application.ProductVersion.ToString.Trim
             ElseIf InformationRequested = "BuildDate" Then
@@ -12,9 +11,6 @@
             ElseIf InformationRequested = "MD5Checksum" Then
                 Return MD5Checksum.MD5((GetAppPath() + "\DCS.Multifunction.Library.dll"), 2)
             End If
-        Else
-            Return Die()
-        End If
     End Function
     Private Function GetAppPath() As String
         Dim l_intCharPos As Integer = 0, l_intReturnPos As Integer

@@ -7,7 +7,6 @@
     Public ChtBorder As Integer = 4 'chld (2/2)
     Public ChtData As String = "" 'chl
     Public Function GenerateQR() As Uri
-        If IsAuthed() = True Then
             Dim ChtTotStr As String = "" 'Chart Total String
 
             '=== Create String and Genrate URI
@@ -25,8 +24,5 @@
 
             '== Finish!
             Return OUTPUTURI
-        Else
-            Die()
-        End If
     End Function 'Generate QR
 End Module

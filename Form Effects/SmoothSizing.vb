@@ -1,6 +1,5 @@
 ﻿Public Module SmoothSizing
     Public Sub ExpandHthenWCentered(ByVal Form As Windows.Forms.Form, ByVal Width As Integer, ByVal Height As Integer)
-        If IsAuthed() = True Then
             'Resize Form
             Dim SizedAndReady As Boolean = False
             Dim H As Integer = Form.Height
@@ -18,12 +17,8 @@
             Loop
             Form.StartPosition = FormStartPosition.CenterScreen
             ScreenPosition.ChangePosition(Form, Positions.Center)
-        Else
-            Die()
-        End If
     End Sub
     Public Sub ExpandWCentered(ByVal Form As Windows.Forms.Form, ByVal Width As Integer)
-        If IsAuthed() = True Then
             Dim W As Integer = Form.Width
             Do Until Form.Width = Width
                 W = W + 1
@@ -32,24 +27,16 @@
                 Threading.Thread.Sleep(1)
             Loop
             ScreenPosition.ChangePosition(Form, Positions.Center)
-        Else
-            Die()
-        End If
     End Sub
     Public Sub ExpandHCentered(ByVal Form As Windows.Forms.Form, ByVal Height As Integer)
-        If IsAuthed() = True Then
             Do Until Form.Height = Height
                 Form.Height = Form.Height + 1
                 ScreenPosition.ChangePosition(Form, Positions.Center)
                 Threading.Thread.Sleep(1)
                 ScreenPosition.ChangePosition(Form, Positions.Center)
             Loop
-        Else
-            Die()
-        End If
     End Sub
     Public Sub ExpandHAndWCentered(ByVal Form As Windows.Forms.Form, ByVal Width As Integer, ByVal Height As Integer)
-        If IsAuthed() = True Then
             Dim H As Integer = Form.Height
             Dim W As Integer = Form.Width
             Do Until Form.Height = Height
@@ -65,12 +52,8 @@
             Loop
             Form.StartPosition = FormStartPosition.CenterScreen
             ScreenPosition.ChangePosition(Form, Positions.Center)
-        Else
-            Die()
-        End If
     End Sub
     Public Sub ShrinkHthenWCentered(ByVal Form As Windows.Forms.Form, ByVal Width As Integer, ByVal Height As Integer)
-        If IsAuthed() = True Then
             'Resize Form
             Dim SizedAndReady As Boolean = False
             Dim H As Integer = Form.Height
@@ -88,12 +71,8 @@
             Loop
             Form.StartPosition = FormStartPosition.CenterScreen
             ScreenPosition.ChangePosition(Form, Positions.Center)
-        Else
-            Die()
-        End If
     End Sub
     Public Sub ShrinkWCentered(ByVal Form As Windows.Forms.Form, ByVal Width As Integer)
-        If IsAuthed() = True Then
             Dim W As Integer = Form.Width
             Do Until Form.Width = Width
                 W = W - 1
@@ -102,24 +81,16 @@
                 Threading.Thread.Sleep(1)
             Loop
             ScreenPosition.ChangePosition(Form, Positions.Center)
-        Else
-            Die()
-        End If
     End Sub
     Public Sub ShrinkHCentered(ByVal Form As Windows.Forms.Form, ByVal Height As Integer)
-        If IsAuthed() = True Then
             Do Until Form.Height = Height
                 Form.Height = Form.Height - 1
                 ScreenPosition.ChangePosition(Form, Positions.Center)
                 Threading.Thread.Sleep(1)
                 ScreenPosition.ChangePosition(Form, Positions.Center)
             Loop
-        Else
-            Die()
-        End If
     End Sub
     Public Sub ShrinkHAndWCentered(ByVal Form As Windows.Forms.Form, ByVal Width As Integer, ByVal Height As Integer)
-        If IsAuthed() = True Then
             Dim H As Integer = Form.Height
             Dim W As Integer = Form.Width
             Do Until Form.Height = Height
@@ -135,8 +106,5 @@
             Loop
             Form.StartPosition = FormStartPosition.CenterScreen
             ScreenPosition.ChangePosition(Form, Positions.Center)
-        Else
-            Die()
-        End If
     End Sub
 End Module

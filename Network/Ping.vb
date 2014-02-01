@@ -5,7 +5,6 @@ Public Module NetPing
     Public ping As New System.Net.NetworkInformation.Ping
     Public lasrerrmsg As String = Nothing
     Public Function GetPingMs(ByRef hostNameOrAddress As String)
-        If IsAuthed() = True Then
             Try
                 Dim ping As New System.Net.NetworkInformation.Ping
                 Dim PRT As String = ping.Send(hostNameOrAddress).RoundtripTime
@@ -15,12 +14,8 @@ Public Module NetPing
                 lasrerrmsg = ex.Message.ToString
                 Return "Error"
             End Try
-        Else
-            Return Die()
-        End If
     End Function
     Public Function GetPingStatus(ByRef host As String)
-        If IsAuthed() = True Then
             'On Error GoTo Err
             Try
                 Dim ping As New System.Net.NetworkInformation.Ping
@@ -29,9 +24,6 @@ Public Module NetPing
             Catch ex As Exception
                 Return ex.Message.ToString
             End Try
-        Else
-            Return Die()
-        End If
         ' GoTo nd
 Err:    ' Return "Error"
         ' GoTo nd

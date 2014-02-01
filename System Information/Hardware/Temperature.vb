@@ -9,7 +9,6 @@ Public Module Temperature
         Raw
     End Enum
     Public Function GetCPUTemp(ByVal Format As TempFormat) As Single
-        If IsAuthed() = True Then
             Try
                 Dim enumerator As System.Management.ManagementObjectCollection.ManagementObjectEnumerator
                 Dim searcher As New System.Management.ManagementObjectSearcher("root\WMI", "SELECT * FROM MSAcpi_ThermalZoneTemperature")
@@ -32,10 +31,6 @@ Public Module Temperature
                 MessageBox.Show(ex.Message.ToString)
                 Return -1
             End Try
-        Else
-            Die()
-            Return -1
-        End If
     End Function
     Public Function GetCPUTempNew(ByVal Format As TempFormat) As Single
         Dim searcher As New ManagementObjectSearcher("root\WMI", "SELECT * FROM MSAcpi_ThermalZoneTemperature")

@@ -102,7 +102,6 @@ Public Module Webcam
 #Region "Subs"
 #Region "Cam System Load"
     Public Sub Initialize(ByVal DevList As ListBox, ByVal CamOut As PictureBox)
-        If IsAuthed() = True Then
             If Init = False Then
                 'CamOUTa = CamOut
                 'CamOutput = CamOut
@@ -118,19 +117,11 @@ Public Module Webcam
                 CamOut.SizeMode = PictureBoxSizeMode.StretchImage
                 ClosePreviewWindow()
             End If
-        Else
-            Die()
-        End If
     End Sub
     Public Sub StopCam()
-        If IsAuthed() = True Then
             ClosePreviewWindow()
-        Else
-            Die()
-        End If
     End Sub
     Private Sub LoadDeviceList(ByVal DevList As ListBox, ByVal CamOut As PictureBox)
-        If IsAuthed() = True Then
             Dim strName As String = Space(100)
             Dim strVer As String = Space(100)
             Dim bReturn As Boolean
@@ -140,14 +131,10 @@ Public Module Webcam
                 If bReturn Then DevList.Items.Add(strName.Trim)
                 x += CType(1, Short)
             Loop Until bReturn = False
-        Else
-            Die()
-        End If
     End Sub
 #End Region
 #Region "Start & Stop"
     Private Sub OpenPreviewWindow(ByVal DevList As ListBox, ByVal CamOut As PictureBox)
-        If IsAuthed() = True Then
             Dim iHeight As Integer = CamOut.Height
             Dim iWidth As Integer = CamOut.Width
             hHwnd = capCreateCaptureWindowA(iDevice.ToString, WS_VISIBLE Or WS_CHILD, 0, 0, 1280, _
@@ -162,22 +149,14 @@ Public Module Webcam
             Else
                 DestroyWindow(hHwnd)
             End If
-        Else
-            Die()
-        End If
     End Sub
     Private Sub ClosePreviewWindow()
-        If IsAuthed() = True Then
             SendMessage(hHwnd, WM_CAP_DRIVER_DISCONNECT, iDevice, 0)
             DestroyWindow(hHwnd)
-        Else
-            Die()
-        End If
     End Sub
 #End Region
 #Region "Capture"
     Public Function CaptureImage()
-        If IsAuthed() = True Then
             Dim data As IDataObject
             Dim bmap As Bitmap
             'OpenPreviewWindow(DevList, CamOUTa)
@@ -193,9 +172,6 @@ Public Module Webcam
                 Return bmap
             End If
             Return Nothing
-        Else
-            Return Die()
-        End If
     End Function
 #End Region
 #End Region

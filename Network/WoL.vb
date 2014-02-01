@@ -17,7 +17,6 @@ Public Class WakeOnLan
                     ByVal MAC As String, ByVal IP As String, _
                     Optional ByVal Subnet As String = "255.255.255.0", _
                     Optional ByVal Port As Integer = 7)
-        If IsAuthed() = True Then
             'Set Variables
             'edtMac = MAC
             'edtIpAddress = IP.ToString
@@ -31,12 +30,8 @@ Public Class WakeOnLan
                 Message = ex.Message.ToString
             End Try
             Return Message
-        Else
-            Return Die()
-        End If
     End Function
     Private Function InvertBinary(ByVal x As String) As String
-        If IsAuthed() = True Then
             Dim ch As Char
             Dim len As Integer = CStr(x).Length
             For Each ch In CStr(x)
@@ -46,9 +41,6 @@ Public Class WakeOnLan
                     InvertBinary += "1"
                 End If
             Next
-        Else
-            Die()
-        End If
     End Function
     Private Function OrIt(ByVal x As Long, ByVal y As Long) As String
         'Pad out
@@ -107,7 +99,6 @@ Public Class WakeOnLan
         Return temp
     End Function
     Private Sub WakeClient(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        If IsAuthed() = True Then
             Dim udpClient As New UdpClient
             Dim buf(101) As Char
             Dim sendBytes As [Byte]() = Encoding.ASCII.GetBytes(buf)
@@ -169,10 +160,5 @@ Public Class WakeOnLan
 
             'udpClient.Send(sendBytes, sendBytes.Length, myAddress, CInt(edtPortNo.Text))
             Message = " Magic Packet sent to " & myAddress
-
-        Else
-            Die()
-        End If
-
     End Sub
 End Class

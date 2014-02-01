@@ -17,7 +17,6 @@
     Public BurnStatus As Integer = 0
     Dim ASwitches As Integer, AInstalldirectory As String, AInput As String, AOutFormat As String, AOutput As String
     Public Function Launcher(ByVal Switches As Integer, ByVal Installdirectory As String, ByVal DVDWriterLetter As String, Optional ByVal Input As String = Nothing, Optional ByVal OutFormat As String = Nothing, Optional ByVal Output As String = "")
-        If IsAuthed() = True Then
             ASwitches = Switches
             AInstalldirectory = Installdirectory
             AInput = Input
@@ -31,17 +30,14 @@
             BurnDrive = (DVDWriterLetter.ToString.Trim + ":".ToString).ToString
             Dim NewThread As Threading.Thread = New Threading.Thread(AddressOf Main)
             NewThread.Start()
-        Else
-            Return Die()
-        End If
-        If errorcount = 0 Then
-            Return Nothing
-        Else
-            Return Errormsg
-        End If
+
+            If errorcount = 0 Then
+                Return Nothing
+            Else
+                Return Errormsg
+            End If
     End Function
     Private Function Main()
-        If IsAuthed() = True Then
             'Set things up
             Instdir = AInstalldirectory
             errorcount = 0
@@ -153,9 +149,7 @@
             ElseIf ErrorCheck() >= 1 Then 'Something went wrong
                 Return ErrorMessage.ToString.Trim 'return the error message
             End If
-        Else
-            Return Die()
-        End If
+
 Done:
     End Function
     Public Function HookTimer1()
@@ -208,7 +202,6 @@ Done:
 
     '==== Tasks to complete by threads ====
     Private Sub Convert()
-        If IsAuthed() = True Then
             Try
                 Dim Opts As String = "-oac lavc -ovc lavc -of mpeg -mpegopts format=dvd:tsaf -vf scale=720:576,harddup -srate 48000 -af lavcresample=48000 -lavcopts vcodec=mpeg2video:vrc_buf_size=1835:vrc_maxrate=9800:vbitrate=5000:keyint=15:vstrict=0:acodec=ac3:abitrate=192:aspect=16/9 -ofps 25 -o C:\Cam2DVD\TempVideo\Out\Output.VOB C:\cam2DVD\TempVideo\In\Input.VIDEO".ToString
                 Dim Total As String = (Instdir.ToString + "\Bin\MEncoder.exe".ToString + " ".ToString + Opts.ToString).ToString
@@ -217,12 +210,8 @@ Done:
             Catch ex As Exception
                 OnError(ex.Message, True, "Convert")
             End Try
-        Else
-            Die()
-        End If
     End Sub 'Convert The Specified Video file (STAGE 2)
     Private Sub MakeDVDfs()
-        If IsAuthed() = True Then
             Try
                 Dim Opts As String = "-x 'C:\Program Files\Dans Computer Services\Cam2DVD\bin\dvdauthor.xml' -o C:\Cam2DVD\TempVideo\DVD\".ToString
                 Dim Total As String = (Instdir.ToString + "\Bin\dvdauthor.exe".ToString + " ".ToString + Opts.ToString).ToString
@@ -231,12 +220,8 @@ Done:
             Catch ex As Exception
                 OnError(ex.Message, True, "MakeDVDfs")
             End Try
-        Else
-            Die()
-        End If
     End Sub '(STAGE 3)
     Private Sub Burn()
-        If IsAuthed() = True Then
             Try
                 BurnStatus = 1
                 Dim NewThread As Threading.Thread = New Threading.Thread(AddressOf DriveOut)
@@ -271,9 +256,6 @@ Done:
             Catch ex As Exception
                 OnError(ex.Message, True, "Burn")
             End Try
-        Else
-            Die()
-        End If
     End Sub 'Burn The Specified Video file (STAGE 5)
     Private Sub C1()
         Try

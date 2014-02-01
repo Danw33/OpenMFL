@@ -10,8 +10,8 @@
     <OutputType>Library</OutputType>
     <StartupObject>
     </StartupObject>
-    <RootNamespace>DCS_Multi_DLL</RootNamespace>
-    <AssemblyName>DCS.Multifunction.Library</AssemblyName>
+    <RootNamespace>OpenMFL</RootNamespace>
+    <AssemblyName>OpenMFL</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>Windows</MyType>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
@@ -24,7 +24,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>DCS.Multifunction.Library.xml</DocumentationFile>
+    <DocumentationFile>OpenMFL.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
     <Optimize>true</Optimize>
     <RegisterForComInterop>true</RegisterForComInterop>
@@ -36,7 +36,7 @@
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>DCS.Multifunction.Library.xml</DocumentationFile>
+    <DocumentationFile>OpenMFL.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <RegisterForComInterop>true</RegisterForComInterop>
@@ -331,7 +331,6 @@
     <EmbeddedResource Include="Encryption and Decryption\Dependancies\MySql.Data.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="About.txt" />
     <None Include="Resources\logo.png" />
     <None Include="Resources\favicon.ico" />
   </ItemGroup>

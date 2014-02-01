@@ -7,14 +7,9 @@ Imports System.Runtime.InteropServices
 Module Harddisk
     Public Class HDDBasic
         Public Function HDDDetails(ByVal WhatDetails As HDDBasic.Detail)
-            If IsAuthed() = True Then
                 Return HDDDetails2(WhatDetails)
-            Else
-                Return Die()
-            End If
         End Function
         Private Function HDDDetails2(ByVal WhatDetails As HDDBasic.Detail)
-            If IsAuthed() = True Then
                 For Each HddDrive As System.IO.DriveInfo In My.Computer.FileSystem.Drives
                     If WhatDetails = HDDBasic.Detail.SerialNumber Then
 
@@ -34,9 +29,6 @@ Module Harddisk
                         Return Convert.ToInt32(HddDrive.TotalSize - HddDrive.AvailableFreeSpace)
                     End If
                 Next
-            Else
-                Return Die()
-            End If
         End Function
         Public Enum Detail
             SerialNumber

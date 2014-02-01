@@ -2,18 +2,12 @@
 Imports System.OperatingSystem
 Public Module OSInfo
     Public Function GetOSName() As String
-        If IsAuthed() = True Then
             Dim OSFriendlyName As System.String = Nothing
             Dim Obj As System.OperatingSystem
             OSFriendlyName = Obj.Platform
             Return OSFriendlyName
-        Else
-            Die()
-            Return "UNAUTHORIZED"
-        End If
     End Function
     Public Function GetOSVersion() As String
-        If IsAuthed() = True Then
             Select Case Environment.OSVersion.Platform
                 Case PlatformID.Win32S
                     Return "Win 3.1"
@@ -56,9 +50,5 @@ Public Module OSInfo
                 Case PlatformID.WinCE
                     Return "Win CE"
             End Select
-        Else
-            Die()
-            Return "UNAUTHORIZED"
-        End If
     End Function
 End Module

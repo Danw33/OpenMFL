@@ -4,7 +4,6 @@ Imports System.Text
 
 Public Module SHAChecksum
     Public Function GetChecksumfromFile(ByVal file As String, ByVal SHAVersion As String, Optional ByVal SHASubType As String = Nothing)
-        If IsAuthed() = True Then
             If SHAVersion = "SHA" Or SHAVersion = "SHA0" Or SHAVersion = 0 Then
                 Return "SHA0 Is too old, Not included in this release!"
             ElseIf SHAVersion = "SHA1" Or SHAVersion = 1 Then
@@ -15,9 +14,6 @@ Public Module SHAChecksum
                 Return "SHA3 Is not Publicly available yet!"
             End If
             Return "Unknown SHA Version Specified"
-        Else
-            Return Die()
-        End If
     End Function
     Private Function SHA1(ByVal File As String)
         Dim FileStream As Stream = IO.File.OpenRead(File)

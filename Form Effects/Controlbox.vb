@@ -22,7 +22,6 @@ ByVal bRevert As Int32 _
     Private Const MF_REMOVE As Int32 = &H1000
 
     Public Sub RemoveCloseButton(ByVal frmForm As Form)
-        If IsAuthed() = True Then
             Dim hMenu As IntPtr, n As Int32
             hMenu = GetSystemMenu(frmForm.Handle, 0)
             If Not hMenu.Equals(IntPtr.Zero) Then
@@ -33,8 +32,5 @@ ByVal bRevert As Int32 _
                     DrawMenuBar(frmForm.Handle)
                 End If
             End If
-        Else
-            Die()
-        End If
     End Sub
 End Class

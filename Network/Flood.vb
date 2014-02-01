@@ -8,7 +8,7 @@ Imports System.Windows.Forms
 'Imports DCSFlooder.Flooder
 'Imports DCSFlooder.HTTPFlooder
 'Imports DCSFlooder.XXPFlooder
-Imports DCS_Multi_DLL
+Imports OpenMFL
 
 Public Class DoSAttacker
     'Protected ReadOnly FAK As Long = 2738949656734840873

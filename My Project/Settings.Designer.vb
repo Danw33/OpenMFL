@@ -99,10 +99,10 @@ Namespace My
      Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute()>  _
     Friend Module MySettingsProperty
         
-        <Global.System.ComponentModel.Design.HelpKeywordAttribute("My.Settings")> _
-        Friend ReadOnly Property Settings() As Global.DCS_Multi_DLL.My.MySettings
+        <Global.System.ComponentModel.Design.HelpKeywordAttribute("My.Settings")>  _
+        Friend ReadOnly Property Settings() As Global.OpenMFL.My.MySettings
             Get
-                Return Global.DCS_Multi_DLL.My.MySettings.Default
+                Return Global.OpenMFL.My.MySettings.Default
             End Get
         End Property
     End Module

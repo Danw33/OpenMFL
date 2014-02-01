@@ -1,13 +1,12 @@
 ﻿Imports System.Data
 Imports System.IO
-Imports DCS_Multi_DLL
-Imports DCS_Multi_DLL.RijndaelEncryption
-Imports DCS_Multi_DLL.MD5Checksum
-Imports DCS_Multi_DLL.RIPEMDChecksum
-Imports DCS_Multi_DLL.SHAChecksum
+Imports OpenMFL
+Imports OpenMFL.RijndaelEncryption
+Imports OpenMFL.MD5Checksum
+Imports OpenMFL.RIPEMDChecksum
+Imports OpenMFL.SHAChecksum
 Module NEFM_Main
     Public Function EncryptFile(ByVal File As String, ByVal EncrPassword As String)
-        If IsAuthed() = True Then
             Dim Password As String
             Password = (HashUp(HashUp(HashUp(HashUp(HashUp(HashUp(HashUp(HashUp(EncrPassword.ToString.Trim))))))))).ToString
             Dim Rnda As Integer = RAND()
@@ -20,12 +19,9 @@ Module NEFM_Main
             IO.Directory.CreateDirectory(TempDir)
             RijndaelEncryption.EncryptFile(File, TempFile, Password)
             Return TempFile
-        Else
-            Return Die()
-        End If
     End Function
+
     Public Function DecryptFile(ByVal File As String, ByVal EncrPassword As String)
-        If IsAuthed() = True Then
             Dim Password As String
             Password = (HashUp(HashUp(HashUp(HashUp(HashUp(HashUp(HashUp(HashUp(EncrPassword.ToString.Trim))))))))).ToString
             Dim Rnda As Integer = RAND()
@@ -38,12 +34,9 @@ Module NEFM_Main
             IO.Directory.CreateDirectory(TempDir)
             RijndaelEncryption.DecryptFile(File, TempFile, Password)
             Return TempFile
-        Else
-            Return Die()
-        End If
     End Function
+
     Private Function HashUp(ByVal InStr As String)
-        If IsAuthed() = True Then
             Dim PWDA As String = MD5Checksum.MD5(InStr.Trim, 1)
             Dim PWDB As String = SHAChecksum.TextHashSHA1(PWDA)
             Dim PWDC As String = SHAChecksum.TextHashSHA256(PWDB)
@@ -52,12 +45,9 @@ Module NEFM_Main
             Dim PWDF As String = MD5Checksum.MD5(PWDE, 1)
             Dim PWDG As String = RijndaelEncryption.EncryptString128Bit(PWDF, UPCID.FullShebaz.ToString, "4EF1F2E236BD5D7B5BB0AA925794887AE8D53A6705AB456162A81F07D2DEA427")
             Return PWDG
-        Else
-            Return Die()
-        End If
     End Function
+
     Public Function RAND()
-        If IsAuthed() = True Then
             'Has A Tendacy to Overflow
             On Error Resume Next
             Dim Val As Short
@@ -68,8 +58,5 @@ Module NEFM_Main
             Val = RandomNumber
             Val = Val & Date.Now.Millisecond
             Return Convert.ToInt32(Val)
-        Else
-            Return Die()
-        End If
     End Function
 End Module

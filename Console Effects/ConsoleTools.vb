@@ -29,22 +29,14 @@ Public Module ConsoleTools
     End Enum
 
     Public Sub SetConsoleColors(ByVal forecolor As ConsoleColor, ByVal backcolor As ConsoleColor)
-        If IsAuthed() = True Then
             Dim hConsole As Integer = GetStdHandle(STD_OUTPUT_HANDLE)
             backcolor = IIf(backcolor = 0, 256, backcolor * 16)
             SetConsoleTextAttribute(hConsole, forecolor Or backcolor)
-        Else
-            Die()
-        End If
     End Sub
 
     Public Sub SetConsoleColors(ByVal forecolor As ConsoleColor)
-        If IsAuthed() = True Then
             Dim hConsole As Integer = GetStdHandle(STD_OUTPUT_HANDLE)
             SetConsoleTextAttribute(hConsole, forecolor)
-        Else
-            Die()
-        End If
     End Sub
 
 End Module

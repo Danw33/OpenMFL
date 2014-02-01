@@ -4,7 +4,6 @@ Imports System.Security.Cryptography
 Imports System.IO
 Public Module MD5Checksum
     Public Function MD5(ByVal Source As String, ByVal Mode As Integer, Optional ByVal Checksum As String = Nothing) As String
-        If IsAuthed() = True Then
             If Mode = 1 Then
                 Return TextHash(Source)
             ElseIf Mode = 2 Then
@@ -16,10 +15,6 @@ Public Module MD5Checksum
             Else
                 Return "Error"
             End If
-        Else
-            Die()
-            Return "Error"
-        End If
     End Function
     Private Function TextHash(ByVal SourceText As String) As String
         Try

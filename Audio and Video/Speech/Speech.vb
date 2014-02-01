@@ -1,6 +1,6 @@
 ﻿Imports System
-Imports DCS_Multi_DLL
-Imports DCS_Multi_DLL.PlayAudio
+Imports OpenMFL
+Imports OpenMFL.PlayAudio
 Imports System.Speech
 Imports System.Speech.Synthesis
 Imports System.Speech.Recognition
@@ -9,7 +9,6 @@ Imports System.Speech.AudioFormat
 Public Module SpeechModule
     Public Class VocalSynthesis 'Class for Computer-Synthesized Vocal Output (By Daniel Wilson, 15/03/2012)
         Public Shared Function SynthSpeak(ByVal WhatToSpeak As String, sender As System.Object, e As System.EventArgs)
-            If IsAuthed() = True Then
                 Try
                     Dim SpeechSynth As New SpeechSynthesizer() 'New Synthesizer
                     SpeechSynth.Rate = 1 'Speed
@@ -19,17 +18,12 @@ Public Module SpeechModule
                 Catch ex As Exception
                     Return ex
                 End Try
-            Else
-                'Killit!!
-                Return Die()
-            End If
         End Function
     End Class
     Public Class SpeechRecognition 'Class for Computerised ASR (Automated Speech Recognition) (By Daniel Wilson, 15/03/2012)
         Shared Gramm As New System.Speech.Recognition.DictationGrammar()
         Public Shared WithEvents SpeechEars As New Speech.Recognition.SpeechRecognitionEngine
         Public Shared Function SpeechListenerInitialisation(sender As System.Object, e As System.EventArgs) As Object
-            If IsAuthed() = True Then
                 Try
                     '
                     ' TODO: Fully initialise speachears and prep grammar
@@ -41,17 +35,10 @@ Public Module SpeechModule
                 Catch ex As Exception
                     Return ex
                 End Try
-            Else
-                Return Die()
-            End If
         End Function
         Public Shared Function SpeechListenerStop(sender As System.Object, e As System.EventArgs)
-            If IsAuthed() = True Then
-                If SpeechEars.AudioState <> Recognition.AudioState.Stopped Then
-                    SpeechEars.RecognizeAsyncStop()
-                End If
-            Else
-                Return Die()
+            If SpeechEars.AudioState <> Recognition.AudioState.Stopped Then
+                SpeechEars.RecognizeAsyncStop()
             End If
         End Function
 

@@ -113,7 +113,6 @@ Public Module GlassFull
      ByVal dwFlags1 As Integer, ByVal dwFlags2 As Integer, ByRef pRect As RECT) As Integer
     Private Declare Auto Function CreateDIBSection Lib "gdi32.dll" (ByVal hdc As IntPtr, ByRef pbmi As BITMAPINFO, ByVal iUsage As UInteger, ByVal ppvBits As Integer, ByVal hSection As IntPtr, ByVal dwOffset As UInteger) As IntPtr
     Public Sub SetGlass(ByVal Form As Form, ByVal L As Int32, ByVal R As Int32, ByVal T As Int32, ByVal B As Int32)
-        If IsAuthed() = True Then
             Dim en As Integer = 0
             Dim mg As New MARGINS()
             mg.m_Buttom = B
@@ -133,9 +132,6 @@ Public Module GlassFull
             Else
                 Throw New ApplicationException("This computer does not have the areo theme capibility.")
             End If
-        Else
-            Die()
-        End If
     End Sub
     Private Function IsCompositionEnabled() As Boolean
 
@@ -154,7 +150,6 @@ Public Module GlassFull
         End If
     End Function
     Public Sub FillBlackRegion(ByVal gph As Graphics, ByVal rgn As Rectangle)
-        If IsAuthed() = True Then
             Dim rc As New RECT()
             rc.left = rgn.Left
             rc.right = rgn.Right
@@ -195,12 +190,8 @@ Public Module GlassFull
             End If
 
             gph.ReleaseHdc()
-        Else
-            Die()
-        End If
     End Sub
     Public Sub DrawTextOnGlass(ByVal hwnd As IntPtr, ByVal text As [String], ByVal font As Font, ByVal ctlrct As Rectangle, ByVal iglowSize As Integer)
-        If IsAuthed() = True Then
             If IsCompositionEnabled() Then
                 Dim rc As New RECT()
                 Dim rc2 As New RECT()
@@ -277,9 +268,6 @@ Public Module GlassFull
                     End If
                 End If
             End If
-        Else
-            Die()
-        End If
     End Sub
 End Module
 
